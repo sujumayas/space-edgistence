@@ -1,0 +1,110 @@
+.menu-screen {
+  background:
+    radial-gradient(ellipse at 50% 0%, #3a0f63 0%, #0a0118 55%, #000 100%);
+  align-items: stretch;
+  overflow-y: auto;
+}
+.menu-inner {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+  display: flex;
+  flex-direction: column;
+}
+.menu-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.menu-title {
+  font-size: 30px;
+  margin: 0;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+.menu-title.alt {
+  color: var(--c-magenta);
+  text-shadow: 0 0 8px var(--c-magenta), 3px 3px 0 var(--c-cyan);
+}
+.menu-tag {
+  font-size: 8px;
+  color: var(--c-yellow);
+  margin-top: 12px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+@media (min-width: 560px) {
+  .menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 10px;
+  min-height: 96px;
+  background: #1c0d3a;
+  border: 2px solid var(--c-cyan);
+  color: var(--c-white);
+  cursor: pointer;
+  text-align: left;
+}
+.game-card:hover {
+  background: #2a1556;
+  box-shadow: 0 0 14px rgba(46, 230, 246, 0.4);
+}
+.game-card.locked {
+  border-color: var(--c-dim);
+  color: var(--c-dim);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+.card-title {
+  font-size: 9px;
+  line-height: 1.4;
+  color: var(--c-cyan);
+}
+.game-card.locked .card-title {
+  color: var(--c-dim);
+}
+.card-sub {
+  font-size: 7px;
+  color: var(--c-yellow);
+}
+.game-card.locked .card-sub {
+  color: var(--c-magenta);
+}
+.card-parody {
+  margin-top: auto;
+  font-size: 6px;
+  color: var(--c-dim);
+  line-height: 1.5;
+}
+
+.menu-footer {
+  margin-top: 22px;
+}
+.menu-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--c-cyan);
+  margin-bottom: 12px;
+}
+.menu-stats span:first-child {
+  color: var(--c-magenta);
+}
+.menu-actions {
+  display: flex;
+  gap: 10px;
+}
+.menu-actions .pixel-btn {
+  text-align: center;
+  font-size: 8px;
+}

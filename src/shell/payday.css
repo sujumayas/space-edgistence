@@ -1,0 +1,108 @@
+.payday-overlay {
+  z-index: 45;
+  pointer-events: none;
+  overflow: hidden;
+  background: rgba(5, 0, 15, 0.25);
+}
+
+.payday-flash {
+  position: absolute;
+  inset: 0;
+  background: var(--c-yellow);
+  opacity: 0;
+  animation: payday-flash 2.9s ease-out both;
+}
+@keyframes payday-flash {
+  0% { opacity: 0.9; }
+  12% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.payday-banner {
+  position: absolute;
+  top: 18%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 28px;
+  color: var(--c-yellow);
+  text-shadow: 0 0 12px var(--c-orange), 4px 4px 0 #000;
+  animation: payday-pop 2.9s ease both;
+}
+@keyframes payday-pop {
+  0% { transform: scale(0.2); opacity: 0; }
+  15% { transform: scale(1.1); opacity: 1; }
+  85% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.payday-bubble {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #160a2e;
+  border: 3px solid #000;
+  padding: 12px 16px;
+  font-size: 9px;
+  line-height: 1.8;
+  white-space: nowrap;
+  animation: payday-bubble 2.9s ease both;
+}
+@keyframes payday-bubble {
+  0%, 25% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  40% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  88% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Mom walks left -> center -> exits right */
+.payday-mom {
+  position: absolute;
+  bottom: 14%;
+  left: -80px;
+  width: 56px;
+  animation: payday-walk 2.9s ease-in-out both;
+}
+@keyframes payday-walk {
+  0% { left: -80px; }
+  30% { left: 42%; }
+  60% { left: 42%; }
+  100% { left: 110%; }
+}
+.mom-head {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+  background: #7b3fb0;
+  border: 3px solid #000;
+  border-radius: 4px;
+  box-shadow: inset -6px -6px 0 rgba(0, 0, 0, 0.25);
+}
+.mom-body {
+  width: 48px;
+  height: 44px;
+  margin: -2px auto 0;
+  background: var(--c-magenta);
+  border: 3px solid #000;
+}
+
+.payday-check {
+  position: absolute;
+  bottom: 30%;
+  font-size: 12px;
+  color: #1a6b2a;
+  background: #d8f7c8;
+  border: 3px solid #000;
+  padding: 8px 12px;
+  animation: payday-throw 2.9s ease-in both;
+  opacity: 0;
+}
+@keyframes payday-throw {
+  0%, 30% { opacity: 0; left: 40%; bottom: 28%; transform: rotate(0deg) scale(0.6); }
+  35% { opacity: 1; }
+  55% { left: 50%; bottom: 60%; transform: rotate(360deg) scale(1.4); opacity: 1; }
+  75% { left: 50%; bottom: 50%; transform: rotate(540deg) scale(1.1); opacity: 1; }
+  100% { opacity: 0; transform: rotate(720deg) scale(0.5); }
+}

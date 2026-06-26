@@ -1,0 +1,172 @@
+/* Synthwave / CRT shell. Palette pulled from the "Space Edgistence" title
+   card and options screen in the reference frames. */
+:root {
+  --c-bg: #0a0118;
+  --c-panel: #160a2e;
+  --c-magenta: #ff2e88;
+  --c-cyan: #2ee6f6;
+  --c-violet: #8a4bff;
+  --c-yellow: #ffd23f;
+  --c-orange: #ff7b29;
+  --c-white: #f4f0ff;
+  --c-dim: #6a5a9a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  background: #000;
+  color: var(--c-white);
+  font-family: var(--font-pixel);
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button {
+  font-family: var(--font-pixel);
+}
+
+/* Stage that holds the scaled canvas */
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 120%, #2a0a4a 0%, #0a0118 60%, #000 100%);
+}
+
+canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+}
+
+/* CRT scanline + glow overlay, sits above the canvas */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.22) 3px,
+    rgba(0, 0, 0, 0.22) 4px
+  );
+  mix-blend-mode: multiply;
+}
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}
+.crt-overlay.off {
+  display: none;
+}
+
+/* Shared overlay UI (pause, menus) rendered as DOM above the canvas */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.overlay.dim {
+  background: rgba(5, 0, 15, 0.78);
+}
+
+.panel {
+  background: var(--c-panel);
+  border: 3px solid var(--c-magenta);
+  box-shadow:
+    0 0 0 3px #000,
+    0 0 24px rgba(255, 46, 136, 0.5);
+  padding: 20px 24px;
+  min-width: 240px;
+}
+
+.title-glow {
+  color: var(--c-cyan);
+  text-shadow: 0 0 8px var(--c-cyan), 3px 3px 0 var(--c-magenta);
+}
+
+.pixel-btn {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px 12px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--c-white);
+  background: #241046;
+  border: 2px solid var(--c-violet);
+  cursor: pointer;
+  text-align: left;
+}
+.pixel-btn:hover,
+.pixel-btn:focus-visible {
+  background: var(--c-violet);
+  color: #fff;
+  outline: none;
+}
+.pixel-btn.locked {
+  color: var(--c-dim);
+  border-color: var(--c-dim);
+  background: #190d2e;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.pixel-btn.danger:hover {
+  background: var(--c-magenta);
+}
+
+.hud {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  font-size: 8px;
+  color: var(--c-white);
+}
+
+.fade-in {
+  animation: fade 0.4s ease both;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}

@@ -1,0 +1,70 @@
+.touch-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  pointer-events: none;
+}
+.touch-overlay button {
+  pointer-events: auto;
+  touch-action: none;
+  font-family: var(--font-pixel);
+  color: var(--c-white);
+  background: rgba(36, 16, 70, 0.55);
+  border: 2px solid var(--c-violet);
+  border-radius: 50%;
+  font-size: 14px;
+}
+.touch-overlay button:active {
+  background: var(--c-violet);
+}
+
+.touch-dpad {
+  position: absolute;
+  left: 16px;
+  bottom: 18px;
+  width: 132px;
+  height: 132px;
+}
+.dpad-btn {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px !important;
+}
+.dpad-up { left: 44px; top: 0; }
+.dpad-down { left: 44px; top: 88px; }
+.dpad-left { left: 0; top: 44px; }
+.dpad-right { left: 88px; top: 44px; }
+
+.touch-actions {
+  position: absolute;
+  right: 18px;
+  bottom: 24px;
+  width: 150px;
+  height: 110px;
+}
+.action-btn {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+}
+.a-btn {
+  right: 0;
+  bottom: 6px;
+  border-color: var(--c-magenta) !important;
+}
+.b-btn {
+  right: 64px;
+  bottom: 30px;
+  border-color: var(--c-cyan) !important;
+}
+
+.touch-start {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 40px;
+  height: 28px;
+  border-radius: 6px !important;
+  font-size: 10px !important;
+}
