@@ -6,12 +6,13 @@ The project is built as 10 self-contained Claude Code sessions. Each session wor
 
 ## Status
 
-**Shippable v1.** The foundation chassis and the first two games are built and verified.
+**Shippable v1.** The foundation chassis and the first three games are built and verified.
 
 - ✅ **Foundation** — engine (fixed-60Hz loop, 256×224 integer-scaled canvas, unified keyboard+touch input, procedural Web Audio SFX, object pool, AABB), CRT/synthwave shell (boot → cutscene → menu → game → game over), pause menu, payday & glitch overlays, leaderboard, mobile touch controls.
 - ✅ **Game 1 — Bills vs Coins** — vertical shooter: pay descending bills with coins before they wreck your 4 possessions. Tobias's "TRUST FUND" chopper, Mom's Payday Defense, locked-HARD difficulty.
 - ✅ **Game 2 — School Run** — auto-scrolling Paperboy-style runner: jump/duck past bullies and falling textbooks, collect A/B grades, dodge F's, and reach the REPORT CARD checkpoint with grade ≥ C. Tobias hoverboards ahead stealing your A's, Masami floats above it all — both cross the finish before you, every time. Fall below F → HELD BACK → respawn as a tiny kindergartener (permanent); second demotion triggers Mom's Payday Defense.
-- ⬜ Games 3–8 + final polish/deploy — pending (see the session table below).
+- ✅ **Game 3 — Micro Chores** — WarioWare-style montage of 25 rapid-fire chores (Dishes, Laundry, Homework, Door, Phone, Cook), one verb resolved every few seconds, never the same twice in a row. Speed ramps +0.2× every 5 chores; 3 shared lives drain on each miss. Between every chore a 1s cutaway rubs in how Tobias's family solves the same task with a butler / robot / AI. Losing 2 of 3 lives triggers Mom's Payday Defense, which auto-completes the next chore.
+- ⬜ Games 4–8 + final polish/deploy — pending (see the session table below).
 
 ```bash
 npm install && npm run dev   # then open the printed localhost URL
@@ -56,10 +57,10 @@ That is the entire onboarding. Each plan file is self-contained.
 | 1 | Foundation | `00-foundation.md` | Shell, engine, pause, menu, leaderboard, cutscene, mobile, placeholder game | ✅ done |
 | 2 | Bills vs Coins | `01-bills-vs-coins.md` | Game 1 polished | ✅ done |
 | 3 | School Run | `02-school-run.md` | Game 2 polished — **shippable v1 reached** | ✅ done |
-| 4 | Bug Swatter | `06-bug-swatter.md` | Simplest game, ideal mobile QA | ⬜ |
-| 5 | Pill Matcher | `07-pill-matcher.md` | Match-3 grid logic | ⬜ |
-| 6 | Brain Drain | `04-brain-drain.md` | Text-heavy mental math | ⬜ |
-| 7 | Micro Chores | `03-micro-chores.md` | WarioWare-style microgames | ⬜ |
+| 4 | Micro Chores | `03-micro-chores.md` | WarioWare-style microgames | ✅ done |
+| 5 | Bug Swatter | `06-bug-swatter.md` | Simplest game, ideal mobile QA | ⬜ |
+| 6 | Pill Matcher | `07-pill-matcher.md` | Match-3 grid logic | ⬜ |
+| 7 | Brain Drain | `04-brain-drain.md` | Text-heavy mental math | ⬜ |
 | 8 | Rush Hour | `05-rush-hour.md` | Top-down racer (most complex) | ⬜ |
 | 9 | Oil Panic | `08-oil-panic.md` | Split-screen survival | ⬜ |
 | 10 | Polish & Deploy | `09-polish-and-deploy.md` | Audio, ending, mobile QA, deploy | ⬜ |
@@ -82,7 +83,7 @@ engine/   game loop, canvas, input, audio, sprite loader, pool, collision
 state/    global GameContext + typed localStorage
 shell/    boot, menu, cutscene, pause, payday/glitch overlays, leaderboard, game-over, HUD
 input/    mobile touch overlay (D-pad + A/B)
-games/    registry + per-game folders (BillsVsCoins, SchoolRun: index.tsx / logic.ts / sprites.ts)
+games/    registry + per-game folders (BillsVsCoins, SchoolRun, MicroChores: index.tsx / logic.ts / sprites.ts)
 ```
 
 Each game follows the same contract: a thin React `index.tsx` drives a **pure** `stepGame(state, pools, input, dt)` in `logic.ts` (which makes the logic headless-testable) and draws via procedural functions in `sprites.ts`.
