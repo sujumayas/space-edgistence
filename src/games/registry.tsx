@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 import type { GameId, GameMeta, MiniGameProps } from '../types/minigame';
 import { BillsVsCoins } from './BillsVsCoins/index';
+import { SchoolRun } from './SchoolRun/index';
 
 export const GAME_META: Record<GameId, GameMeta> = {
   bills: {
@@ -32,4 +33,5 @@ export const GAME_ORDER: GameId[] = [
 /** Components for games that are actually implemented this session. */
 export const GAME_COMPONENTS: Partial<Record<GameId, ComponentType<MiniGameProps>>> = {
   bills: BillsVsCoins,
+  school: SchoolRun,
 };

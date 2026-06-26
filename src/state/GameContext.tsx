@@ -16,6 +16,7 @@ import {
   saveSettings,
 } from './storage';
 import { setMuted } from '../engine/useAudio';
+import { GAME_COMPONENTS } from '../games/registry';
 
 export type Screen = 'boot' | 'menu' | 'cutscene' | 'playing' | 'gameover';
 
@@ -71,7 +72,17 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [activeGame, setActiveGame] = useState<GameId | null>(null);
   const [lastStats, setLastStats] = useState<GameStats | null>(null);
 
-  const [unlocked] = useState<GameId[]>(progress0.unlocked);
+  // Any game with a registered component is playable — union it with the
+  // persisted list so implementing a game auto-unlocks it (and persists it),
+  // without per-game seed edits or migrations for existing saves.
+  const [unlocked] = useState<GameId[]>(() => {
+    const implemented = Object.keys(GAME_COMPONENTS) as GameId[];
+    const merged = Array.from(new Set([...progress0.unlocked, ...implemented]));
+    if (merged.length !== progress0.unlocked.length) {
+      saveProgress({ ...loadProgress(), unlocked: merged });
+    }
+    return merged;
+  });
   const [leaderboard] = useState<ScoreEntry[]>(() => loadLeaderboard());
   const [ochoBest, setOchoBest] = useState(progress0.bestTotal);
   const [settings, setSettings] = useState(settings0);
